@@ -11,10 +11,12 @@ to save your state from one log in to the next.
 \fBopenbox-session\fR does not take any command line 
 arguments. 
 .PP 
-On log in, \fBopenbox-session\fR will run the 
-~/.config/openbox/autostart.sh script if it exists, and will run the 
-system-wide script @configdir@/openbox/autostart.sh otherwise. You may 
-place anything you want to run automatically in those files, for example: 
+On log in, \fBopenbox-session\fR runs the system-wide script 
+@configdir@/openbox/autostart, followed by 
+$XDG_CONFIG_HOME/openbox/autostart (or ~/.config/openbox/autostart if 
+XDG_CONFIG_HOME is unset or empty), if those files exist. At each location, 
+autostart.sh is used instead if autostart does not exist. You may place 
+anything you want to run automatically in those files, for example: 
  
 .PP 
 .RS 
@@ -25,10 +27,9 @@ gnome-settings-daemon &
 .fi 
 .RE 
 .PP 
-Make sure that each line is followed by a "&" or else the script will 
-stop there and further commands will not be executed. You can use the 
-@configdir@/openbox/autostart.sh file as an example for creating your 
-own. 
+End commands for long-running programs with a "&" so that subsequent 
+commands can run without waiting for those programs to exit. You can use 
+@configdir@/openbox/autostart as an example for creating your own. 
 .SH "SEE ALSO" 
 .PP 
 openbox(1), openbox-session(1), openbox-gnome-session(1). 
@@ -39,4 +40,4 @@ The program's full documentation is available on the website:
 .PP 
 Please report bugs to: \fBhttp://bugzilla.icculus.org/ 
 \fP 
-.\" created by instant / docbook-to-man, Wed 06 Jan 2010, 13:40 
+.\" created by instant / docbook-to-man 

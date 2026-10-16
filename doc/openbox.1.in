@@ -18,11 +18,11 @@ in the login session type menu for Openbox:
 within GNOME or KDE, you can choose the appropriate entry, and it will 
 launch GNOME or KDE with Openbox as the window manager. 
 .PP 
-The third option at log in, which is \fBOpenbox\fR       without a session manager, uses the \fBopenbox-session\fR       command to start Openbox. On log in, \fBopenbox\fR will 
-run the ~/.config/openbox/autostart.sh script if it exists, and will run 
-the system-wide script @configdir@/openbox/autostart.sh otherwise. You 
-may place anything you want to run automatically in those files, for 
-example: 
+The third option at log in, which is \fBOpenbox\fR       without a session manager, uses the \fBopenbox-session\fR       command to start Openbox. On log in, \fBopenbox-session\fR       runs the system-wide script @configdir@/openbox/autostart, followed by 
+$XDG_CONFIG_HOME/openbox/autostart (or ~/.config/openbox/autostart if 
+XDG_CONFIG_HOME is unset or empty), if those files exist. At each location, 
+autostart.sh is used instead if autostart does not exist. You may place 
+anything you want to run automatically in those files, for example: 
  
 .PP 
 .RS 
@@ -33,18 +33,14 @@ gnome-settings-daemon &
 .fi 
 .RE 
 .PP 
-Make sure that each line is followed by a "&" or else the script will 
-stop there and further commands will not be executed. You can use the 
-@configdir@/openbox/autostart.sh file as an example for creating your 
-own. 
-.PP 
-The default @configdir@/openbox/autostart.sh runs a number of things 
-with Openbox. 
+End commands for long-running programs with a "&" so that subsequent 
+commands can run without waiting for those programs to exit. You can use 
+@configdir@/openbox/autostart as an example for creating your own. 
 .PP 
 Lastly, if you use \fBstartx\fR to launch your X 
 session, you can set up a ~/.xinitrc file to run 
 \fBopenbox-session\fR and follow the same directions as 
-above regarding the autostart.sh file. 
+above regarding the autostart files. 
 .PP 
 You can use the \fBobconf\fR tool to configure Openbox 
 easily with a graphical interface, however more in-depth configuration 
@@ -101,4 +97,4 @@ The program's full documentation is available on the website:
 .PP 
 Please report bugs to: \fBhttp://bugzilla.icculus.org/ 
 \fP 
-.\" created by instant / docbook-to-man, Sun 30 Sep 2012, 17:58 
+.\" created by instant / docbook-to-man 

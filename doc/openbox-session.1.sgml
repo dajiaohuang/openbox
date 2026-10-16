@@ -43,20 +43,21 @@ manpage.1: manpage.sgml
     <para><command>&dhpackage;</command> does not take any command line
       arguments.</para>
 
-    <para>On log in, <command>&dhpackage;</command> will run the
-      ~/.config/openbox/autostart.sh script if it exists, and will run the
-      system-wide script @configdir@/openbox/autostart.sh otherwise. You may
-      place anything you want to run automatically in those files, for example:
+    <para>On log in, <command>&dhpackage;</command> runs the system-wide script
+      @configdir@/openbox/autostart, followed by
+      $XDG_CONFIG_HOME/openbox/autostart (or ~/.config/openbox/autostart if
+      XDG_CONFIG_HOME is unset or empty), if those files exist. At each location,
+      autostart.sh is used instead if autostart does not exist. You may place
+      anything you want to run automatically in those files, for example:
       </para>
 
     <blockquote><literallayout>
       xsetroot -solid grey &
       gnome-settings-daemon &</literallayout></blockquote>
 
-    <para>Make sure that each line is followed by a "&" or else the script will
-      stop there and further commands will not be executed. You can use the
-      @configdir@/openbox/autostart.sh file as an example for creating your
-      own.</para>
+    <para>End commands for long-running programs with a "&" so that subsequent
+      commands can run without waiting for those programs to exit. You can use
+      @configdir@/openbox/autostart as an example for creating your own.</para>
 
   </refsect1>
   <refsect1>
